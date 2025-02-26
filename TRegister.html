@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggest a ShoppingMall</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling with Background Image and Overlay */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('C:\Users\HP\Pictures\hotelsuggestion1.jpg') no-repeat center center fixed;
+            /* Replace with your desired background image URL */
+            background-size: cover;
+            color: #333;
+        }
+
+        /* Container Styling */
+        .suggestion-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .suggestion-container h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: #4d79ff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="suggestion-container">
+    <h1>Sign Up here</h1>
+    <form action="Tsignup.jsp" method="post" onsubmit="return validateForm()">
+Username: <input type="text" name="username" id="username" required><br><br>
+Password: <input type="password" name="password" id="password" required><br><br>
+Confirm password: <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+<input type="submit" value="SUBMIT" id="submit">
+    </form>
+</div>
+<script>
+function validateForm() {
+var username = document.getElementById("username").value;
+var password = document.getElementById("password").value;
+var confirmPassword = document.getElementById("confirmPassword").value;
+var length = password.length;
+var lowercase = /[a-z]/;
+var upperCase = /[A-Z]/;
+var specialChar= /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+var number = /[0-9]/;
+if (password === "") {
+alert("Please enter a password!");
+return false;
+}
+if (password !== confirmPassword) {
+alert("Passwords do not match!");
+return false;
+}
+if(length<8){
+alert("password must be 8digits long");
+return false;
+}
+if(!number.test(password)){
+alert("Password must contain at least one number.");
+return false;
+}
+if(!specialChar.test(password)){
+alert("Password must contain at least one special character.");
+return false;
+}
+}
+</script>
+</body>
+</html>

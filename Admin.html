@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Hotel</title>
+  <style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+}
+    /* Navigation Bar */
+    .navbar {
+      background: rgb(251,251,251);
+      background: linear-gradient(90deg, rgba(251,251,251,1) 0%, rgba(212,246,255,1) 50%, rgba(198,231,255,1) 100%);
+      color: #fff;
+      padding: 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+        padding-left: 20px;
+        height: 80px; /* Set the height of the logo */
+        width: auto;  /* Maintain aspect ratio */
+        margin-right: 1em; /* Space between the logo and navigation links */
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links li {
+      margin-left: 1em;
+      position: relative;
+    }
+    
+    .nav-links a {
+      color: #121111;
+      text-decoration: none;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+    
+    .dropdown {
+        position: relative;
+      }
+      
+      .dropdown-menu {
+        margin-top: 18px;
+        position: absolute;
+        background: linear-gradient(90deg, rgba(251, 251, 251, 1) 0%, rgba(212, 246, 255, 1) 50%, rgba(198, 231, 255, 1) 100%);
+        list-style: none;
+        top: 100%;
+        left: 0;
+        min-width: 200px;
+        padding: 2px 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+      }
+      
+      .dropdown:hover .dropdown-menu,
+      .dropdown-menu:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+      }
+      
+      .dropdown-menu li {
+        padding: 10px 20px;
+        
+        color: linear-gradient(90deg, #FFCCEA 0%, #CDC1FF 100%);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      
+      .dropdown-menu li:hover {
+        background: linear-gradient(90deg, #FFCCEA 0%, #CDC1FF 100%);
+        color: #fff;
+        cursor: pointer;
+        border-top-left-radius: 10px; /* Curves on the top-left */
+        border-bottom-left-radius: 10px; /* Curves on the bottom-left */
+      }
+      
+
+.container {
+    margin-top: 80px;
+    position: fixed;
+    display: flex;
+    width: 100%;
+    max-width: 1600px;
+    height: 100vh;
+    font-family: serif;
+}
+
+.left-images {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.left-images img {
+    width: 100%;
+    height: calc(33.33% - 10px);
+    object-fit: cover;
+    
+}
+
+.sidebar {
+    width: 16%;
+    	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.logo1 {
+    text-align: center;
+    margin-top: 100px;
+}
+
+/* Main nav styling */
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: -220px;
+}
+
+.main-nav ul li {
+    display: flex;
+  position: relative; /* Required for positioning the submenu relative to the main menu item */
+  display: block; /* Make sure each menu item is a block-level element */
+  margin-right: 60px; /* Space between each main menu item */
+  margin-bottom: 10px; /* Space between each menu item */
+}
+
+
+.main-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  background-color: rgba(51, 51, 51, 0.7);;
+  text-align: center;
+  border-radius: 0 7px 7px 0;
+}
+
+/* Sub-nav styling */
+.sub-nav {
+  display: none; /* Hide the submenu by default */
+  background-color: #FFA1F5;
+  width: 150px; /* Adjust the width as needed */
+  position: absolute; /* Position the submenu relative to the parent */
+  top: 0%; /* Align the submenu below the main menu */
+  left: 180px; /* Align to the left of the parent item */
+  z-index: 10;
+  
+}
+
+/* Sub-nav links styling */
+.sub-nav a {
+  color: #000000;
+  text-decoration: none;
+  padding: 8px 10px;
+  display: block;
+  border-radius: 5px;
+}
+
+.sub-nav a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Show sub-nav when hovering over the main menu item or the sub-menu itself */
+.main-nav ul li:hover .sub-nav,
+.sub-nav:hover {
+  display: block;
+}
+
+
+footer {
+    text-align: center;
+    font-size: 0.75em;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #d9b79c;
+}
+
+.right-collage {
+    width: 75%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.right-collage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+</style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="nav-container">
+      <img class="logo" src="Images/logo.png">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown"><a href="AboutCity.html">About City</a></li>
+        <li class="dropdown" style="color: #121111;">Explore</a>
+          <ul class="dropdown-menu">
+          <li><a href="tourist-spots.jsp">Tourist Spots</a></li>
+          <li><a href="SacredPlaces.jsp">Sacred Places</a></li>
+          <li><a href="hotel.jsp">Hotels</a></li>
+          <li><a href="ShoppingMalls.jsp">Shopping</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="Transport.html">Transportation</a>
+<!--          <ul class="dropdown-menu">
+            <li><a href="#local-transport">Local Transport</a></li>
+            <li><a href="#cabs-rentals">Cabs&Rentals</a></li>
+            <li><a href="#airport-info">Airport Info</a></li>
+          </ul>-->
+        </li>
+        <li class="dropdown"><a href="Admin.html">Admin Login</a>
+        <li class="dropdown"><a href="#user-profile">Contact us</a>
+      </ul>
+    </div>
+  </nav>
+
+    <div class="container">
+        <!-- Left Section with 3 Images -->
+        <div class="left-images">
+            <img src="Images/left-image1.jpg" alt="Image 1">
+            <img src="Images/left-image2.jpg" alt="Image 2">
+            <img src="Images/left-image3.jpg" alt="Image 3" >
+        </div>
+
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <div class="logo1">
+                <img src="Images/explorea.png">
+            </div>
+            <nav class="main-nav">
+    <ul>
+        <li>
+            <a href="#" class="main-menu">Mix in</a>
+            <div class="sub-nav">
+                <a href="HotelInput.jsp">Hotels</a>
+                <a href="ShoppingMallsInput.jsp">Shopping</a>
+                <a href="TouristInput.jsp">Tourist Spot</a>
+                <a href="SacredPlacesInput.jsp">Sacred Places</a>
+            </div>
+        </li>
+        <li>
+            <a href="#" class="main-menu">Upgrade</a>
+            <div class="sub-nav">
+                <a href="HotelEditList.jsp">Hotels</a>
+                <a href="ShoppingMallsEditList.jsp">Shopping</a>
+                <a href="TouristEditLogin.jsp">Tourist Spot</a>
+                <a href="SacredPlacesEditLogin.jsp">Sacred Places</a>
+            </div>
+        </li>
+        <li>
+            <a href="#" class="main-menu">Discard</a>
+            <div class="sub-nav">
+                <a href="HotelList.jsp">Hotels</a>
+                <a href="ShoppingMallsList.jsp">Shopping</a>
+                <a href="TouristList.jsp">Tourist Spot</a>
+                <a href="SacredPlacesList.jsp">Sacred Places</a>
+            </div>
+        </li>
+                <li>
+            <a href="#" class="main-menu">Requests</a>
+            <div class="sub-nav">
+                <a href="hotelRequest.jsp">Hotels</a>
+                <a href="shoppingRequest.jsp">Shopping</a>
+                <a href="touristRequest.jsp">Tourist Spot</a>
+                <a href="#">Sacred Places</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+
+            <footer>
+                <p>&copy; ModernHotel 2024 | <a href="#">Privacy policy</a></p>
+            </footer>
+        </div>
+
+        <!-- Right Collage Section (3x5 Grid) -->
+        <div class="right-collage">
+            <img src="Images/right-image1.jpeg" alt="Image 1">
+            <img src="Images/right-image2.jpeg" alt="Image 2">
+            <img src="Images/right-image3.jpeg" alt="Image 3">
+            <img src="Images/right-image4.jpeg" alt="Image 4">
+            <img src="Images/right-image10.jpg" alt="Image 5">
+            <img src="Images/right-image6.jpeg" alt="Image 6">
+            <img src="Images/right-image7.jpeg" alt="Image 7">
+            <img src="Images/right-image8.jpeg" alt="Image 8">
+            <img src="Images/right-image9.jpeg" alt="Image 9">
+            <img src="Images/right-image101.jpeg" alt="Image 10">
+            <img src="Images/hotels.png" alt="Image 11">
+            <img src="Images/right-image12.jpg" alt="Image 12">
+            <img src="Images/right-image13.jpeg" alt="Image 13">
+            <img src="Images/adilabad.jpg" alt="Image 14">
+            <img src="Images/history.png" alt="Image 15">
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.main-menu').forEach(item => {
+  item.addEventListener('click', (event) => {
+    event.preventDefault();
+    const subMenu = item.nextElementSibling;
+    if (subMenu.style.display === 'block') {
+      subMenu.style.display = 'none'; // Close the submenu if already open
+    } else {
+      subMenu.style.display = 'block'; // Open the submenu
+    }
+  });
+});
+
+    </script>
+</body>
+</html>

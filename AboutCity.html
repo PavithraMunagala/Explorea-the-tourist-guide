@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart City Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <style>
+
+    /* Basic reset and styling */
+    * {
+      
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      overflow-x: hidden;
+      background-color: #1E201E;
+      font-family: helvetica, sans-serif;
+  font-size: 16px;
+  color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-align: left;
+  letter-spacing: 0.9px;
+  line-height: 21px;
+    }
+    
+    /* Background Video Styling */
+.video-bg-container {
+    position: relative;
+    width: 100%;
+    height: 110vh;
+    overflow: hidden;
+    padding-top: 100px; /* Adjust this to match navbar height */
+}
+
+.video-bg-container img {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    height: 110vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.navbar {
+    background: linear-gradient(90deg, rgba(251,251,251,1) 0%, rgba(212,246,255,1) 50%, rgba(198,231,255,1) 100%);
+    color: #fff;
+    padding: 0;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+    position: fixed;
+}
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+        padding-left: 20px;
+        height: 80px; /* Set the height of the logo */
+        width: auto;  /* Maintain aspect ratio */
+        margin-right: 1em; /* Space between the logo and navigation links */
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links li {
+      margin-left: 1em;
+      position: relative;
+    }
+    
+    .nav-links a {
+      color: #121111;
+      text-decoration: none;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+    
+    .dropdown {
+        position: relative;
+      }
+      
+      .dropdown-menu {
+        margin-top: 18px;
+        position: absolute;
+        background: linear-gradient(90deg, rgba(251, 251, 251, 1) 0%, rgba(212, 246, 255, 1) 50%, rgba(198, 231, 255, 1) 100%);
+        list-style: none;
+        top: 100%;
+        left: 0;
+        min-width: 200px;
+        padding: 2px 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+      }
+      
+      .dropdown:hover .dropdown-menu,
+      .dropdown-menu:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+      }
+      
+      .dropdown-menu li {
+        padding: 10px 20px;
+        
+        color: linear-gradient(90deg, #FFCCEA 0%, #CDC1FF 100%);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      
+      .dropdown-menu li:hover {
+        background: linear-gradient(90deg, #FFCCEA 0%, #CDC1FF 100%);
+        color: #fff;
+        cursor: pointer;
+        border-top-left-radius: 10px; /* Curves on the top-left */
+        border-bottom-left-radius: 10px; /* Curves on the bottom-left */
+      }
+      
+      
+    /* Centering Search Bar */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 300px;
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+    }
+    
+    /* Search Bar Styling */
+    .search-bar {
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    
+    button {
+      margin-left: 0.5em;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      border: none;
+      border-radius: 4px;
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    /* Intro Section */
+    .intro {
+      text-align: center;
+      padding: 5em 1em 2em;
+      margin-top: 100px;
+    }
+    
+    .banner h1 {
+      font-size: 2.5em;
+    }
+    
+    .banner p {
+      font-size: 1.2em;
+    }
+    
+    .section {
+      margin: 1em;
+      text-align: center;
+      flex: 1 1 150px;
+      max-width: 200px;
+    }
+    
+    .section img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Feedback and Reviews Section */
+    .feedback {
+      background-color: #f4f4f4;
+      padding: 2em;
+      text-align: center;
+    }
+    
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 20;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-content {
+      background: #fff;
+      padding: 2em;
+      margin: 10% auto;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .modal-content input {
+      width: 100%;
+      padding: 0.5em;
+      margin: 0.5em 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    /* Footer */
+    .footer {
+      background: #333;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .menu-toggle {
+        display: none; /* Hidden by default */
+        font-size: 2em;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    
+    .modal-content button {
+      padding: 0.5em 1em;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+      }
+
+      
+.head-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25vh;
+    text-align: center;
+    font-family: 'Merriweather', serif; /* Serif font */
+}
+
+/* Optional styling */
+.head-content h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.head-content p {
+    font-size: 1.2rem;
+    color: #fff;
+}
+.head-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #fff; /* Slightly transparent color */
+    width: 80%;
+    margin: 0 auto;
+    margin-top: -3rem;
+}
+
+/* Additional styling for head-body paragraph */
+.head-body p {
+    max-width: 800px; /* Set a maximum width for readability */
+    line-height: 1.6;
+    font-size: 1rem;
+}
+/* Container for mission section */
+/* Style for left-content */
+.left-content {
+    flex: 1; /* Allow left content to take available space */
+    max-width: 40%; /* Set a max width for the left content */
+    padding-right: 2rem; /* Add space to the right for separation */
+    opacity: 0; /* Start with hidden content */
+    animation: slideLeft 8s ease forwards; /* Use animation */
+    animation-delay: 2s; /* Delay for left content */
+    margin-left: 200px;
+    color: #fff;
+}
+
+/* Style for right-logo */
+.right-logo {
+ 
+    display: flex; /* Center the logo */
+    justify-content: center; /* Center the logo horizontally */
+    align-items: center; /* Center the logo vertically */
+    opacity: 0; /* Start with hidden content */
+    animation: slideRight 8s ease forwards; /* Use animation */
+    animation-delay: 2s; /* Delay for right logo */
+    margin-right: 200px;
+    width: 300px;
+    height: 300px;
+}
+
+/* Keyframes for left content animation */
+@keyframes slideLeft {
+    0% {
+        transform: translateX(-100px); /* Start from left */
+        opacity: 0; /* Hidden */
+    }
+    100% {
+        transform: translateX(0); /* End at original position */
+        opacity: 1; /* Fully visible */
+    }
+}
+
+/* Keyframes for right logo animation */
+@keyframes slideRight {
+    0% {
+        transform: translateX(100px); /* Start from right */
+        opacity: 0; /* Hidden */
+    }
+    100% {
+        transform: translateX(0); /* End at original position */
+        opacity: 1; /* Fully visible */
+    }
+}
+
+/* Optional styling for the logo */
+.right-logo img {
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Optional styling for the mission heading and paragraph */
+.mission h1 {
+    font-size: 2rem; /* Adjust font size for heading */
+    margin-bottom: 1rem; /* Spacing below the heading */
+}
+
+.mission p {
+    line-height: 1.6; /* Increase line height for readability */
+    margin-bottom: 1rem; /* Spacing between paragraphs */
+}
+
+/* Container for mission section */
+.mission {
+    display: flex; /* Use flexbox for layout */
+    align-items: flex-start; /* Align items at the start */
+    justify-content: space-between; /* Space between left and right content */
+    padding: 1rem; /* Add padding around the container */
+}
+
+/* Head content styles */
+.head-content {
+    text-align: center; /* Center align text */
+    padding: 2rem; /* Add padding */
+}
+
+/* Head body styles */
+.head-body {
+    padding: 2rem; /* Add padding */
+}
+
+/* Style for the echoes-content container */
+.echoes-content {
+    display: flex; /* Use flexbox for layout */
+    align-items: flex-start; /* Align items at the start */
+    justify-content: center; /* Center align the content */
+    padding: 2rem; /* Padding around the container */
+    margin-top: 2rem; /* Space above the echoes content */
+}
+
+/* Style for the container holding the echoes content */
+.parent-container { /* Adjust this to match your parent class */
+    display: flex; /* Use flexbox to align children */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    flex-direction: column; /* Stack children vertically */
+    padding: 2rem; /* Padding for the parent container */
+}
+
+/* Style for the echoes image container */
+.echoes {
+    display: flex; /* Use flexbox for the image container */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    margin-bottom: 1rem; /* Space below the image */
+}
+
+/* Style for the image */
+.echoes img {
+    max-width: 100%; /* Make image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for the image */
+    margin-top: -5rem;
+}
+
+/* Style for the echoes-content */
+.echoes-content {
+    display: flex; /* Use flexbox to arrange items */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+    justify-content: center; /* Center items vertically */
+    max-width: 75%; /* Set a max width for the content */
+    color: #fff; /* Text color */
+    text-align: center; /* Center align text */
+    margin-left: 220px;
+}
+
+/* Style for the heading */
+.echoes-content h1 {
+    font-size: 2rem; /* Adjust heading size */
+    margin-bottom: 1rem; /* Space below the heading */
+}
+
+/* Style for the paragraphs */
+.echoes-content p {
+    line-height: 1.6; /* Increase line height for readability */
+    margin-bottom: 1rem; /* Space between paragraphs */
+}
+.body-site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.row1, .row2, .row3, .row4 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px; /* Limits row width */
+}
+
+.left-content1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%; /* Keeps each side balanced */
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    animation: slideLeft 8s ease forwards;;
+}
+.right-logo1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%; /* Keeps each side balanced */
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    animation: slideRight 8s ease forwards;;
+}
+.image {
+    width: 300px; /* Consistent width */
+    height: 300px; /* Consistent height */
+    object-fit: cover; /* Ensures images are cropped to fit without distortion */
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.heading-look {
+    display: flex;
+    justify-content: center; /* Center the heading */
+    margin-top: 20px;
+    font-family: 'Georgia', serif; /* Add a classic font */
+    font-size: 2.5rem; /* Increase the size */
+    font-weight: bold;
+    color: #fff; /* Change color to a dark shade */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 2px; /* Add spacing for a clean look */
+}
+
+
+  </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <img class="logo" src="Images/logo.png">
+      <button class="menu-toggle" id="mobile-menu">☰</button> <!-- Hamburger Icon -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown"><a href="AboutCity.html">About City</a></li>
+        <li class="dropdown" style="color: #121111;">Explore</a>
+          <ul class="dropdown-menu">
+          <li><a href="tourist-spots.jsp">Tourist Spots</a></li>
+          <li><a href="SacredPlaces.jsp">Sacred Places</a></li>
+          <li><a href="hotel.jsp">Hotels</a></li>
+          <li><a href="ShoppingMall.jsp">Shopping</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="Transport.html">Transportation</a>
+        </li>
+        <li class="dropdown"><a href="Contact.html">Contact us</a>
+      </ul>
+    </div>
+  </nav>
+  <!-- Background Video -->
+  <div class="video-bg-container">
+      <img src="Images/TSHetitage.png">
+  </div>
+  
+  <div class="head-content">
+      <h1>TELANGANA HERITAGE</h1><!-- comment --> 
+      <p>JOURNEY THROUGH TIME, CULTURE, AND TRADITION<p>
+  </div>
+  <div class="head-body">
+    <p>
+        Heritage of Telangana is your doorway to uncovering the fascinating history, culture, and architectural splendor of Telangana’s cities. We are dedicated to guiding you through the vibrant past of this region, offering authentic insights into its traditions, and curating memorable experiences that bring Telangana's storied legacy to life. Whether you're a history enthusiast, a cultural explorer, or simply curious, let us be your trusted companion on a journey to explore Telangana’s timeless heritage.
+    </p>
+</div>
+  <div class="mission">
+      <div class="left-content">
+          <h1>Our Mission & Approach</h1><br>
+          <p>At Telangana Heritage, we warmly invite you to explore, connect, and immerse yourself in the rich cultural tapestry of Telangana. Our friendly team of heritage experts is here to guide you through the heart of the state, sharing unique insights and heartfelt stories about the history and traditions that make each city special.</p><br>
+          <p>Our close-knit network of local experts allows us to offer authentic experiences that reflect the true essence of Telangana. Whether you’re wandering through ancient temples, admiring iconic monuments, or joining in the festivities, we’re dedicated to making your journey enriching and memorable. Let us walk alongside you as you uncover the vibrant stories that shape the past and present of Telangana, and we look forward to sharing this beautiful journey with you!<p>
+      </div>
+      <div class="right-logo">
+          <img src="Images/rightlogo.png">
+      </div>
+  </div>
+  <div class="echoes-content">
+      <div class="echoes">
+          <img src="Images/echoes_1.png"><!-- comment -->
+      </div><!-- comment -->
+      <div>
+          <p>Listen to the echoes of the past with Telangana Heritage, where every heritage site tells a tale and every festival celebrates our rich history. Ancient temples, forts, and monuments serve as living storytellers, inviting you to delve into the narratives that shaped our land and its people.Embark on a journey to immerse yourself in the rhythms of our history and discover the treasures of our cultural heritage. Let the echoes of the past guide you as you explore, learn, and celebrate the richness of our shared heritage!</p>
+</div>
+      <div class="body-site">
+         <div class="heading-look"> 
+          <h1>Lets have a look</h1><!-- comment -->
+         </div>
+          
+         <div class="row1">
+             
+          <div class="left-content1">
+              <img src="Images/charminar.jpg" class="image"><!-- comment -->
+              <h2>HYDERABAD</h2><!-- comment -->
+              <p>Hyderabad is a vibrant city where rich history meets modernity, highlighted by landmarks like the Charminar and Golconda Fort. Famous for its culinary delight, the city is particularly known for the world-renowned Hyderabadi Biryani.</p>
+          </div>
+          <div class="right-logo1">
+              <img src="Images/warangal.jpg" class="image">
+              <h2>WARANGAL</h2>
+              <p>Once the capital of the Kakatiya dynasty, Warangal is rich in history, famous for the Warangal Fort and the Thousand Pillar Temple that reflect its architectural grandeur. </p>
+          </div>
+             
+       </div>
+          
+      <div class="row2">
+          
+          <div class="left-content1">
+              <img src="Images/kairathabad.jpg" class="image">
+              <h2>KHAIRATABAD</h2><!-- comment -->
+              <p>Khairatabad is a culturally rich neighborhood in Hyderabad, known for its historic temples. The Khairatabad Ganesh idol, renowned for its size, draws thousands of devotees each Ganesh Chaturthi.</p>
+          </div>
+          <div class="right-logo1">
+              <img src="Images/adilabad.jpg" class="image"><!-- comment -->
+              <h2>ADILABAD</h2> 
+              <p>Adilabad is renowned for its rich tribal heritage and breathtaking natural beauty, celebrated through vibrant festivals like Sankranti, which feature traditional music and dance.</p>
+          </div>
+          
+       </div>   
+          
+          <div class="row3">
+              
+          <div class="left-content1">
+              <img src="Images/dance.jpg" class="image"><!-- comment -->
+              <h2>DANCE AND MUSIC</h2> 
+              <p>Telangana's cultural tapestry is enriched by the dynamic dance form of Perini Sivatandavam and vibrant folk music that together celebrate the region's rich heritage during festive occasions.</p>
+          </div>
+          <div class="right-logo1">
+              <img src="Images/festival.jpeg" class="image"><!-- comment -->
+              <h2>FESTIVALS</h2><!-- comment -->
+              <p>Telangana celebrates vibrant festivals like Bonalu, honoring goddess Mahakali, and Bathukamma, which showcases floral artistry during the harvest season.</p>
+          </div>
+              
+          </div>
+          
+          <div class="row4">
+              
+          <div class="left-content1">
+              <img src="Images/food.jpeg" class="image"><!-- comment -->
+              <h2>FOOD</h2>
+              <p>Telangana cuisine is distinguished by bold flavors, with specialties such as Hyderabadi Biryani, Sakinalu, and Pesarattu reflecting its agricultural roots.</p>
+          </div>
+          <div class="right-logo1">
+              <img src="Images/history.png" class="image"><!-- comment -->
+              <h2>HISTORICAL SPOTS AND FORTS</h2><!-- comment -->
+              <p>Golkonda Fort and the Qutb Shahi Tombs are key historical sites in Telangana, highlighting the region's architectural grandeur and historical significance.</p>
+          </div>
+              
+          </div>
+      </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Build a Survey Form using HTML and CSS
+    </title>
+
+    <style>
+        /* Body with animated gradient and subtle overlay */
+        body {
+            background: linear-gradient(135deg, rgba(105, 169, 255, 0.8), rgba(173, 232, 213, 0.8)), url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+            background-size: cover;
+            font-family: Verdana, sans-serif;
+            text-align: center;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gradient animation for a dynamic effect */
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Form styling with updated colors and effects */
+        form {
+            background-color: rgba(255, 255, 255, 0.95);
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px 20px;
+            box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Fade-in animation for the form */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form control styling */
+        .form-control {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .form-control label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            font-family: inherit;
+            padding: 10px;
+            display: block;
+            width: 95%;
+            transition: border-color 0.3s ease;
+            background-color: rgba(240, 240, 240, 0.8);
+        }
+
+        .form-control input:focus,
+        .form-control textarea:focus {
+            outline: none;
+            border-color: #6d9ee6;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Submit button styling */
+        button {
+            background-color: #5a8ed8;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 21px;
+            padding: 10px;
+            width: 100%;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #4a7ec8;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Feedback Form</h1>
+
+    <!-- Create Form -->
+    <form id="form" action="Tfeedback.jsp">
+        <div class="form-control">
+            <label for="comment">
+                Any comments or suggestions
+            </label>
+            <textarea name="feedback" id="comment" placeholder="Enter your comment here"></textarea>
+        </div>
+
+        <button type="submit" value="submit">
+            Submit
+        </button>
+    </form>
+</body>
+
+</html>

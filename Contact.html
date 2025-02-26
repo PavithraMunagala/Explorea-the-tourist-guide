@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Trattatello&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <title>Heritage Contact Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background: rgb(251,251,251);
+      background: linear-gradient(90deg, rgba(251,251,251,1) 0%, rgba(212,246,255,1) 50%, rgba(198,231,255,1) 100%);
+      color: #fff;
+      padding: 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      padding-left: 20px;
+      height: 80px;
+      width: auto;
+      margin-right: 1em;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li {
+      margin-left: 1em;
+      position: relative;
+    }
+
+    .nav-links a {
+      color: #121111;
+      text-decoration: none;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      margin-top: 18px;
+      position: absolute;
+      background: linear-gradient(90deg, rgba(251, 251, 251, 1) 0%, rgba(212, 246, 255, 1) 50%, rgba(198, 231, 255, 1) 100%);
+      list-style: none;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      padding: 2px 0;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu:hover {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+    }
+
+    .dropdown-menu li {
+      padding: 10px 20px;
+    }
+
+    .dropdown-menu li:hover {
+      background: linear-gradient(90deg, #FFCCEA 0%, #CDC1FF 100%);
+      color: #fff;
+      cursor: pointer;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+.background {
+  background-image: url('Images/contact.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.background h1 {
+  font-family: 'Lora', serif; 
+  font-size: 3em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Contact Information Section */
+.contact-info {
+  background-color: #f5e3b5;
+  padding: 30px 10%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info div {
+  font-size: 1.2em;
+}
+
+.contact-info div i {
+  margin-right: 10px;
+}
+
+.contact-form {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Aligns content horizontally to the center */
+  justify-content: center; /* Vertically centers content */
+  background-color: #faf0d1;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+  text-align: center; /* Ensures all text inside the form is centered */
+}
+
+.contact-form p, .contact-form h3 {
+  margin: 13px 0; /* Adds spacing between paragraphs */
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures the form elements are centered */
+  width: 100%;
+  max-width: 100%; /* Adjust the form width to be responsive */
+}
+
+.contact-form input, .contact-form textarea, .contact-form button {
+  width: 100%;
+  max-width: 100%; /* Set a maximum width for form fields */
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Verdana', sans-serif;
+}
+
+.contact-form button {
+  background-color: #fff;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: skyblue;
+}
+
+
+
+#j {
+  font-family: 'Brush Script MT', cursive, sans-serif; /* Brush Script font for cursive style */
+  font-size: 2em; /* Slightly larger font for readability */
+  line-height: 1.8;
+  max-width: 830px;
+  margin: 0 auto;
+  padding: 10px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for readability */
+}
+
+
+
+/* Social Media Section */
+.social-media {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.social-media h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.social-media p {
+  margin-bottom: 20px;
+}
+
+.social-media a {
+  margin: 0 15px;
+  font-size: 2.5em;
+  color: #c49e60;
+  text-decoration: none;
+}
+
+.social-media a:hover {
+  color: #9e7b45;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Font Awesome Adjustments */
+.fab {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <img class="logo" src="Images/logo.png">
+    
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="AboutCity.html">About City</a></li>
+        <li class="dropdown"><a href="Explore.html">Explore</a>
+          <ul class="dropdown-menu">
+            <li><a href="tourist-spots.jsp">Tourist Spots</a></li>
+            <li><a href="SacredPlaces.jsp">Sacred Places</a></li>
+            <li><a href="hotel.jsp">Hotels</a></li>
+            <li><a href="ShoppingMalls.jsp">Shopping</a></li>
+          </ul>
+        </li>
+        <li><a href="Transport.html">Transportation</a></li>
+        <li><a href="AdminLogin.html">Admin Login</a></li>
+        <li><a href="Contact.html">Contact us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <div class="background">
+    <h1>Connect with Us to Plan Your Journey!</h1>
+  </div>
+
+  <!-- Contact Information Section -->
+  <div class="contact-info">
+    <div>
+      <i class="fas fa-phone"></i> Phone: 08458 - 222000, 08458 - 222001
+    </div>
+    <div>
+      <i class="fas fa-envelope"></i> Email: info@bvrit.ac.in
+    </div>
+    <div>
+      <i class="fas fa-map-marker-alt"></i> Address: Vishnupur, Narsapur, Medak District, 502313
+    </div>
+  </div>
+<!-- Contact Form Section -->
+<div class="contact-form">
+  <p id="j">We’re here to make your journey through the city’s heritage, exploration spots, and transportation options smooth and memorable. Whether you have questions, need assistance, or just want to share your experience, we’d love to hear from you!</p>
+  <p>Looking for recommendations? Our team is happy to guide you to the city’s best heritage sites and hidden gems.</p><br><!-- comment -->
+  <p>Need help planning your transportation? Let us simplify your travel arrangements.</p>
+  <h3>Send Us a Message</h3>
+  <form action="contact.jsp" method="post">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="text" name="subject" placeholder="Message" required>
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+
+  <!-- Social Media Section -->
+  <div class="social-media">
+    <h2>Follow Us</h2>
+    <p>Stay connected with us through social media</p>
+    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>&copy; 2024 Heritage | All Rights Reserved</p>
+  </div>
+
+  <script>
+    // Mobile menu toggle script
+    document.getElementById('mobile-menu').addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

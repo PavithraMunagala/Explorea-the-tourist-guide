@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart City Guide</title>
+  <style>
+    /* Basic reset and styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Background Video Styling */
+    .video-bg-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    
+    .video-bg-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      background: rgb(251,251,251);
+      background: linear-gradient(90deg, rgba(251,251,251,1) 0%, rgba(212,246,255,1) 50%, rgba(198,231,255,1) 100%);
+      color: #fff;
+      padding: 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+        padding-left: 20px;
+        height: 80px; /* Set the height of the logo */
+        width: auto;  /* Maintain aspect ratio */
+        margin-right: 1em; /* Space between the logo and navigation links */
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links li {
+      margin-left: 1em;
+      position: relative;
+    }
+    
+    .nav-links a {
+      color: #121111;
+      text-decoration: none;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+    
+    .dropdown {
+        position: relative;
+      }
+      
+      .dropdown-menu {
+        margin-top: 18px;
+        position: absolute;
+        background: linear-gradient(90deg, rgba(251, 251, 251, 1) 0%, rgba(212, 246, 255, 1) 50%, rgba(198, 231, 255, 1) 100%);
+        list-style: none;
+        top: 100%;
+        left: 0;
+        min-width: 200px;
+        padding: 2px 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+      }
+      
+      .dropdown:hover .dropdown-menu,
+      .dropdown-menu:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+      }
+      
+      .dropdown-menu li {
+        padding: 10px 20px;
+        
+        color: linear-gradient(90deg, #FFCCEA 0%, #CDC1FF 100%);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      
+      .dropdown-menu li:hover {
+        background: linear-gradient(90deg, #FFCCEA 0%, #CDC1FF 100%);
+        color: #fff;
+        cursor: pointer;
+        border-top-left-radius: 10px; /* Curves on the top-left */
+        border-bottom-left-radius: 10px; /* Curves on the bottom-left */
+      }
+      
+      
+    /* Centering Search Bar */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 300px;
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+    }
+    
+    /* Search Bar Styling */
+    .search-bar {
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    
+    button {
+      margin-left: 0.5em;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      border: none;
+      border-radius: 4px;
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    /* Intro Section */
+    .intro {
+      text-align: center;
+      padding: 5em 1em 2em;
+      margin-top: 100px;
+    }
+    
+    .banner h1 {
+      font-size: 2.5em;
+    }
+    
+    .banner p {
+      font-size: 1.2em;
+    }
+    
+    .section {
+      margin: 1em;
+      text-align: center;
+      flex: 1 1 150px;
+      max-width: 200px;
+    }
+    
+    .section img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Feedback and Reviews Section */
+    .feedback {
+      background-color: #f4f4f4;
+      padding: 2em;
+      text-align: center;
+    }
+    
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 20;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-content {
+      background: #fff;
+      padding: 2em;
+      margin: 10% auto;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .modal-content input {
+      width: 100%;
+      padding: 0.5em;
+      margin: 0.5em 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    /* Footer */
+    .footer {
+      background: #333;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .menu-toggle {
+        display: none; /* Hidden by default */
+        font-size: 2em;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    
+    .modal-content button {
+      padding: 0.5em 1em;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+      }
+    .sidebar {
+        display: none; /* Hidden by default */
+        font-size: 2em;
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block; /* Show toggle button on mobile */
+        }
+
+        .nav-links {
+          display: none; /* Hide links by default */
+          flex-direction: column; /* Stack links vertically */
+          width: 100%; /* Full width for mobile */
+          background-color: #333; /* Match navbar background */
+          position: absolute; /* Absolute positioning */
+          top: 60px; /* Position below the navbar */
+          left: 0; /* Align to the left */
+          z-index: 1; /* Ensure it appears above other content */
+        }
+      
+        .nav-links.active {
+          display: flex; /* Show links when active */
+        }
+      
+        .menu-toggle {
+          display: flex; /* Show toggle button on mobile */
+        }
+      
+        .navbar {
+          flex-direction: column; /* Stack navbar items on mobile */
+          align-items: flex-start; /* Align items to the start */
+        }
+      
+        .search-container {
+          width: 100%; /* Full width for search on mobile */
+        }
+      
+        .search-container input {
+          width: 80%; /* Make input wider */
+          margin-right: 10px; /* Add margin between input and button */
+        }
+      
+        .search-container button {
+          padding: 5px 10px; /* Adjust button padding */
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px; /* Width of the sidebar */
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hide off-screen */
+            background-color: #333; /* Sidebar background */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            transition: 0.3s; /* Animation for sliding effect */
+            z-index: 20; /* Ensure it's above other content */
+          }
+          
+          .sidebar-links {
+            list-style-type: none; /* Remove bullets */
+            padding: 0; /* Remove padding */
+          }
+          
+          .sidebar-links li {
+            padding: 15px; /* Padding for each link */
+          }
+          
+          .sidebar-links a {
+            color: #fff; /* Link color */
+            text-decoration: none; /* Remove underline */
+          }
+          
+          .close-btn {
+            font-size: 2em;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+          }
+    }          
+    
+      .sidebar {
+        height: 100%;
+        width: 250px; /* Width of the sidebar */
+        position: fixed;
+        top: 0;
+        left: -250px; /* Hide off-screen */
+        background-color: #333; /* Sidebar background */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        transition: 0.3s; /* Animation for sliding effect */
+        z-index: 20; /* Ensure it's above other content */
+      }
+      
+      .sidebar-links {
+        list-style-type: none; /* Remove bullets */
+        padding: 0; /* Remove padding */
+      }
+      
+      .sidebar-links li {
+        padding: 15px; /* Padding for each link */
+      }
+      
+      .sidebar-links a {
+        color: #fff; /* Link color */
+        text-decoration: none; /* Remove underline */
+      }
+      
+      .close-btn {
+        font-size: 2em;
+        color: #fff;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      
+      
+      /* Tablets and Desktops */
+      @media (min-width: 769px) {
+        .nav-links {
+          display: flex; /* Show links in row for larger screens */
+        }
+      
+        .navbar {
+          flex-direction: row; /* Keep horizontal layout */
+        }
+            /* Sidebar */
+    .sidebar {
+        height: 100%;
+        width: 250px; /* Width of the sidebar */
+        position: fixed;
+        top: 0;
+        left: -250px; /* Hide off-screen */
+        background-color: #333; /* Sidebar background */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        transition: 0.3s; /* Animation for sliding effect */
+        z-index: 20; /* Ensure it's above other content */
+      }
+  
+      .sidebar-links {
+        list-style-type: none; /* Remove bullets */
+        padding: 0; /* Remove padding */
+      }
+  
+      .sidebar-links li {
+        padding: 15px; /* Padding for each link */
+      }
+  
+      .sidebar-links a {
+        color: #fff; /* Link color */
+        text-decoration: none; /* Remove underline */
+      }
+  
+      .close-btn {
+        font-size: 2em;
+        color: #fff;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+  
+      }
+
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <div class="video-bg-container">
+    <video autoplay muted loop>
+      <source src="Images/200435-912684337_small.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <img class="logo" src="Images/logo.png">
+      <button class="menu-toggle" id="mobile-menu">☰</button> <!-- Hamburger Icon -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown"><a href="AboutCity.html">About City</a></li>
+        <li class="dropdown" style="color: #121111;">Explore</a>
+          <ul class="dropdown-menu">
+          <li><a href="tourist-spots.jsp">Tourist Spots</a></li>
+          <li><a href="SacredPlaces.jsp">Sacred Places</a></li>
+          <li><a href="hotel.jsp">Hotels</a></li>
+          <li><a href="ShoppingMalls.jsp">Shopping</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="Transport.html">Transportation</a>
+        </li>
+        <li class="dropdown"><a href="AdminLogin.html">Admin Login</a>
+        <li class="dropdown"><a href="Contact.html">Contact us</a>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Intro Section -->
+  <header class="intro">
+    <div class="banner">
+      <div style="display: inline-flex;"><h1>Welcome to Telangana's</h1><img class="explorea" src="Images/explorea.png"></div>
+      <p style="margin-top: 16px;">Your ultimate guide to explore and experience the city like a local.</p>
+      <div class="search-container">
+  <input type="text" placeholder="Search for hotels, shopping malls, places, etc." class="search-bar" id="searchBar" style="margin-top: 18px;">
+  <button onclick="handleSearch()" style="margin-top: 18px;">Search</button>
+  <div class="search-results" id="searchResults"></div>
+</div>
+  </header>
+
+
+
+  <!-- Modal for Feedback -->
+  <div class="modal" id="feedbackModal">
+    <div class="modal-content">
+      <h2>Feedback Form</h2>
+      <input type="text" placeholder="Your Name" id="feedbackName">
+      <input type="text" placeholder="Your Feedback" id="feedbackMessage">
+      <button onclick="submitFeedback()">Submit</button>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <!-- <footer class="footer">
+    <p>© 2024 Smart City Guide. All rights reserved.</p>
+  </footer> -->
+
+  <script>
+    function handleSearch() {
+    const searchBar = document.getElementById("searchBar");
+    const searchTerm = searchBar.value.toLowerCase().trim();
+    const searchResults = document.getElementById("searchResults");
+    searchResults.innerHTML = '';
+
+    // Mapping of keywords to respective pages
+    const pageMappings = {
+      "hotel.jsp": ["hotel", "inn", "lodging"],
+      "SacredPlaces.jsp": ["sacred places", "temple", "church", "mosque", "shrine"],
+      "ShoppingMalls.jsp": ["shopping mall", "mall", "shopping", "stores"],
+      "tourist-spots.jsp": ["tourist", "sightseeing", "golconda", "fort", "beach", "museum"],
+      "Transport.html": ["transport", "bus", "train", "flight", "taxi"]
+    };
+
+    // Find the corresponding page based on search term keywords
+    let found = false;
+    for (const [page, keywords] of Object.entries(pageMappings)) {
+      if (keywords.some(keyword => searchTerm.includes(keyword))) {
+        window.location.href = page;
+        found = true;
+        break;
+      }
+    }
+
+    // Show "No results found" if no match
+    if (!found) {
+      searchResults.style.display = 'block';
+      searchResults.innerHTML = `<p>No results found for "${searchTerm}"</p>`;
+    }
+
+    // Hide results if no input
+    if (searchTerm === "") {
+      searchResults.style.display = 'none';
+    }
+  }
+    const mobileMenu = document.getElementById('mobile-menu');
+      const navLinks = document.querySelector('.nav-links');
+      
+      mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active'); // Toggle 'active' class on click
+      });
+      // Toggle sidebar
+    function openSidebar() {
+      document.getElementById("sidebar").classList.add("active");
+    }
+    
+    function closeSidebar() {
+      document.getElementById("sidebar").classList.remove("active");
+    }
+    
+    // Toggle modal
+    function openModal() {
+      document.getElementById("myModal").style.display = "block";
+    }
+    
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>

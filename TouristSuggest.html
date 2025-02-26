@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggest a Tourist Spot</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling with Background Image and Overlay */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('C:\Users\HP\Pictures\hotelsuggestion1.jpg') no-repeat center center fixed;
+            /* Replace with your desired background image URL */
+            background-size: cover;
+            color: #333;
+        }
+
+        /* Container Styling */
+        .suggestion-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .suggestion-container h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: #4d79ff;
+        }
+
+        /* Form Group Styling */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            border-color: #4d79ff;
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        /* Submit Button Styling */
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .submit-btn {
+            background-color: #4d79ff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #3b5bd6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="suggestion-container">
+    <h1>Suggest a Hotel</h1>
+    <form action="TouristSuggest.jsp" method="post">
+        <!-- Hotel Name Field -->
+        <div class="form-group">
+            <label for="Tourist_Spot">Tourist Spot:</label>
+            <input type="text" id="Tourist_Spot" name="Tourist_Spot" required>
+        </div>
+
+        <!-- Hotel Address Field -->
+        <div class="form-group">
+            <label for="Address"> Address:</label>
+            <textarea id="Address" name="Address" placeholder="Enter Tourist Spot address here" required=></textarea>
+        </div>
+
+        <!-- Additional Information Field -->
+        <div class="form-group">
+            <label for="additionalInfo">Additional Information:</label>
+            <textarea id="additionalInfo" name="AdditionalInfo" placeholder="Any extra details about the hotel"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="btn-container">
+            <button type="submit" class="submit-btn">Submit Suggestion</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
